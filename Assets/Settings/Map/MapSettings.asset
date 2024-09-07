@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7aa221c1947744919edcf19ba3f32585, type: 3}
   m_Name: MapSettings
   m_EditorClassIdentifier: 
-  <Center>k__BackingField: {x: 0, y: 0}
+  <Center>k__BackingField: {x: 0, y: 1}
   <ZIndex>k__BackingField: -5
   <MapSize>k__BackingField: {x: 12, y: 6}
   <BlockSize>k__BackingField: {x: 0.5, y: 0.5}
