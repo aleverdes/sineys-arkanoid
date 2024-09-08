@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <BaseSpeed>k__BackingField: 5
   <MaxSpeed>k__BackingField: 15
-  <IncreaseSpeedPerSecond>k__BackingField: 0.115
+  <IncreaseSpeedPerSecond>k__BackingField: 0.09
