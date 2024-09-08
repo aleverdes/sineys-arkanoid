@@ -16,6 +16,7 @@ namespace TaigaGames.SineysArkanoid.Session.Services
         [Inject] private readonly PadService _padService;
         [Inject] private readonly PadLaunchService _padLaunchService;
         [Inject] private readonly BallService _ballService;
+        [Inject] private readonly BallSpeedService _ballSpeedService;
         
         [Inject] private readonly SessionUIService _sessionUIService;
         
@@ -69,6 +70,7 @@ namespace TaigaGames.SineysArkanoid.Session.Services
 
         private void CreateNewBall()
         {
+            _ballSpeedService.Reset();
             var newBall = _ballService.CreateBall(Vector2.zero, true);
             _padLaunchService.SetBallForLaunch(newBall);
         }

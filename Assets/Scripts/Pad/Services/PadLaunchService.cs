@@ -11,6 +11,7 @@ namespace TaigaGames.SineysArkanoid.Pad.Services
         [Inject] private readonly PadService _padService;
         [Inject] private readonly PadSettings _padSettings;
         [Inject] private readonly BallService _ballService;
+        [Inject] private readonly BallSpeedService _ballSpeedService;
         
         private BallBehaviour _ballForLaunch;
         private Vector2 _prevPadPosition;
@@ -73,7 +74,7 @@ namespace TaigaGames.SineysArkanoid.Pad.Services
             var forceAngle = Mathf.LerpAngle(-_padSettings.MaxLaunchAngle, _padSettings.MaxLaunchAngle, GetBallToPadRatio(_ballForLaunch));
             var vector = Quaternion.Euler(0f, 0f, forceAngle) * Vector2.up;
             
-            _ballService.AddForceToBall(_ballForLaunch, _padSettings.LaunchForce * vector);
+            _ballService.AddForceToBall(_ballForLaunch, _ballSpeedService.Speed * vector);
 
             _ballForLaunch = null;
         }

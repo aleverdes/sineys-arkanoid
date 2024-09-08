@@ -16,6 +16,7 @@ namespace TaigaGames.SineysArkanoid.Pad.MonoBehaviours
         [Inject] private readonly PadLaunchService _padLaunchService;
         [Inject] private readonly PadSettings _padSettings;
         [Inject] private readonly BallService _ballService;
+        [Inject] private readonly BallSpeedService _ballSpeedService;
 
         private float _collisionCooldown;
 
@@ -34,7 +35,7 @@ namespace TaigaGames.SineysArkanoid.Pad.MonoBehaviours
                 var ratio = _padLaunchService.GetBallToPadRatio(ballBehaviour);
                 var forceAngle = Mathf.LerpAngle(-_padSettings.MaxLaunchAngle, _padSettings.MaxLaunchAngle, ratio);
                 var vector = Quaternion.Euler(0f, 0f, forceAngle) * Vector2.up;
-                _ballService.SetForceToBall(ballBehaviour, _padSettings.LaunchForce * vector);
+                _ballService.SetForceToBall(ballBehaviour, _ballSpeedService.Speed * vector);
             }
 
             _collisionCooldown = 0.2f;
