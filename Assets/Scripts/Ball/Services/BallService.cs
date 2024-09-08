@@ -34,6 +34,16 @@ namespace TaigaGames.SineysArkanoid.Ball.Services
             _balls.Clear();
         }
         
+        public IReadOnlyList<BallBehaviour> GetBalls()
+        {
+            return _balls;
+        }
+        
+        public int GetBallsCount()
+        {
+            return _balls.Count;
+        }
+        
         public void FreezeBall(BallBehaviour ball)
         {
             ball.Rigidbody.bodyType = RigidbodyType2D.Kinematic;
