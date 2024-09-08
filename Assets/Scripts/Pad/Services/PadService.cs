@@ -6,6 +6,7 @@ namespace TaigaGames.SineysArkanoid.Pad.Services
 {
     public class PadService
     {
+        [Inject] private readonly DiContainer _diContainer;
         [Inject] private readonly PadArea _padArea;
         [Inject] private readonly PadBehaviour _padBehaviourPrefab;
         
@@ -17,6 +18,11 @@ namespace TaigaGames.SineysArkanoid.Pad.Services
         public bool IsPadCreated => _padBehaviourInstance != null;
         
         /// <summary>
+        /// Pad behaviour instance
+        /// </summary>
+        public PadBehaviour PadBehaviourInstance => _padBehaviourInstance;
+        
+        /// <summary>
         /// Create pad
         /// </summary>
         /// <exception cref="Exception">Pad already created</exception>
@@ -24,8 +30,8 @@ namespace TaigaGames.SineysArkanoid.Pad.Services
         {
             if (_padBehaviourInstance != null)
                 throw new System.Exception("Pad already created");
-            
-            _padBehaviourInstance = Object.Instantiate(_padBehaviourPrefab, _padArea.transform);
+
+            _padBehaviourInstance = _diContainer.InstantiatePrefabForComponent<PadBehaviour>(_padBehaviourPrefab, _padArea.transform);
         }
         
         /// <summary>
@@ -64,15 +70,15 @@ namespace TaigaGames.SineysArkanoid.Pad.Services
         /// </summary>
         /// <param name="padPosition">Pad position (in units)</param>
         /// <returns>True if the pad is created, false otherwise</returns>
-        public bool TryGetPadPositionX(out float padPosition)
+        public bool TryGetPadPosition(out Vector2 padPosition)
         {
             if (_padBehaviourInstance == null)
             {
-                padPosition = 0;
+                padPosition = Vector2.zero;
                 return false;
             }
             
-            padPosition = _padBehaviourInstance.transform.position.x;
+            padPosition = _padBehaviourInstance.transform.position;
             return true;
         }
     }

@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <KeyboardMovementSpeed>k__BackingField: 16
   <BaseScale>k__BackingField: 0.25
+  <MaxLaunchAngle>k__BackingField: 45
+  <LaunchForce>k__BackingField: 4

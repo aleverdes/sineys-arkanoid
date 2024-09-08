@@ -62,6 +62,7 @@ namespace TaigaGames.SineysArkanoid.Level.Services
                 );
                 block.SpriteRenderer.sprite = descriptor.Sprite;
                 block.transform.localScale = 0.2f * Vector3.one;
+                block.gameObject.AddComponent<PolygonCollider2D>();
             }
         }
         

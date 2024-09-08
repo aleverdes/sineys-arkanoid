@@ -20,6 +20,8 @@ namespace TaigaGames.SineysArkanoid.Pad
             Container.BindInstance(_padSettings);
 
             Container.BindInterfacesAndSelfTo<PadService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<PadLaunchService>().AsSingle();
+            
             Container.BindInterfacesAndSelfTo<PadScenario>().AsSingle();
         }
     }

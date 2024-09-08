@@ -36,7 +36,7 @@ namespace TaigaGames.SineysArkanoid.Pad.Scenarios
         
         private void UpdatePadByKeyboardInput()
         {
-            if (!_padService.TryGetPadPositionX(out var padPosition))
+            if (!_padService.TryGetPadPosition(out var padPosition))
                 return;
             
             var delta = 0f;
@@ -49,8 +49,8 @@ namespace TaigaGames.SineysArkanoid.Pad.Scenarios
             
             if (delta == 0) return;
             
-            padPosition += delta * Time.deltaTime * _padSettings.KeyboardMovementSpeed;
-            _padService.TryMovePad(padPosition);
+            padPosition.x += delta * Time.deltaTime * _padSettings.KeyboardMovementSpeed;
+            _padService.TryMovePad(padPosition.x);
         }
         
         private void UpdatePadByMouseInput()

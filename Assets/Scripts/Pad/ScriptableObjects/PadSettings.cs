@@ -10,5 +10,9 @@ namespace TaigaGames.SineysArkanoid.Pad.ScriptableObjects
         
         [field: Header("Sizes")]
         [field: SerializeField] public float BaseScale { get; private set; } = 0.25f;
+        
+        [field: Header("Launch")]
+        [field: SerializeField] public float MaxLaunchAngle { get; private set; } = 45f;
+        [field: SerializeField] public float LaunchForce { get; private set; } = 6f;
     }
 }
