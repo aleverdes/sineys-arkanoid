@@ -12,7 +12,7 @@ namespace TaigaGames.SineysArkanoid.Level.Services
 {
     public class BlockService
     {
-        private const float BoosterChance = 0.12f;
+        private const float BoosterChance = 0.05f;
         private const int MaxBallsCount = 10;
 
         [Inject] private readonly DiContainer _diContainer;
