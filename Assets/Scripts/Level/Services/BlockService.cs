@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TaigaGames.SineysArkanoid.Ball.Services;
 using TaigaGames.SineysArkanoid.Level.MonoBehaviours;
 using TaigaGames.SineysArkanoid.Level.ScriptableObjects;
@@ -26,10 +27,13 @@ namespace TaigaGames.SineysArkanoid.Level.Services
         public int StartBlocksCount { get; private set; }
         public int CurrentBlocksCount { get; private set; }
         
+        private readonly HashSet<BlockBehaviour> _destroyedBlocks = new HashSet<BlockBehaviour>();
+        
         public void Reset()
         {
             StartBlocksCount = 0;
             CurrentBlocksCount = 0;
+            _destroyedBlocks.Clear();
         }
 
         public void CreateBlock(BlockDescriptor descriptor, Vector2Int position, Transform parent)
@@ -50,6 +54,9 @@ namespace TaigaGames.SineysArkanoid.Level.Services
         
         public void DestroyBlock(BlockBehaviour blockBehaviour)
         {
+            if (!_destroyedBlocks.Add(blockBehaviour))
+                return;
+            
             var position = blockBehaviour.transform.position;
             position.z -= 3f;
             
