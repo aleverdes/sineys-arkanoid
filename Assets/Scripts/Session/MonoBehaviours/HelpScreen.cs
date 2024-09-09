@@ -1,12 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace TaigaGames.SineysArkanoid.Session.MonoBehaviours
 {
-    public class SessionPauseScreen : MonoBehaviour
+    public class HelpScreen : MonoBehaviour
     {
         [SerializeField] private Button _continueButton;
-        [SerializeField] private Button _mainMenuButton;
         
         private void Awake()
         {
@@ -23,27 +23,20 @@ namespace TaigaGames.SineysArkanoid.Session.MonoBehaviours
             if (Input.GetKeyDown(KeyCode.Escape))
                 OnContinueButtonClicked();
         }
-        
+
         private void OnEnable()
         {
             _continueButton.onClick.AddListener(OnContinueButtonClicked);
-            _mainMenuButton.onClick.AddListener(OnMainMenuButtonClicked);
         }
         
         private void OnDisable()
         {
             _continueButton.onClick.RemoveListener(OnContinueButtonClicked);
-            _mainMenuButton.onClick.RemoveListener(OnMainMenuButtonClicked);
         }
         
         private void OnContinueButtonClicked()
         {
             Destroy(gameObject);
-        }
-        
-        private void OnMainMenuButtonClicked()
-        {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
         }
     }
 }

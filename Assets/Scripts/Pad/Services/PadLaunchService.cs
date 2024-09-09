@@ -1,6 +1,7 @@
 ﻿using TaigaGames.SineysArkanoid.Ball.MonoBehaviours;
 using TaigaGames.SineysArkanoid.Ball.Services;
 using TaigaGames.SineysArkanoid.Pad.ScriptableObjects;
+using TaigaGames.SineysArkanoid.Session.Services;
 using UnityEngine;
 using Zenject;
 
@@ -12,6 +13,7 @@ namespace TaigaGames.SineysArkanoid.Pad.Services
         [Inject] private readonly PadSettings _padSettings;
         [Inject] private readonly BallService _ballService;
         [Inject] private readonly BallSpeedService _ballSpeedService;
+        [Inject] private readonly SessionService _sessionService;
         
         private BallBehaviour _ballForLaunch;
         private Vector2 _prevPadPosition;
@@ -34,7 +36,7 @@ namespace TaigaGames.SineysArkanoid.Pad.Services
 
         public void Tick()
         {
-            if (!_padService.IsPadCreated)
+            if (!_padService.IsPadCreated || !_sessionService.IsInProcess() || Time.timeScale < 0.5f)
                 return;
 
             MoveBall();

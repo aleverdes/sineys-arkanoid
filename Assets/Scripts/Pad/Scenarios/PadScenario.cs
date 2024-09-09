@@ -1,5 +1,6 @@
 ﻿using TaigaGames.SineysArkanoid.Pad.ScriptableObjects;
 using TaigaGames.SineysArkanoid.Pad.Services;
+using TaigaGames.SineysArkanoid.Session.Services;
 using UnityEngine;
 using Zenject;
 
@@ -7,6 +8,7 @@ namespace TaigaGames.SineysArkanoid.Pad.Scenarios
 {
     public class PadScenario : ITickable
     {
+        [Inject] private readonly SessionService _sessionService;
         [Inject] private readonly PadService _padService;
         [Inject] private readonly PadSettings _padSettings;
         [Inject] private readonly Camera _camera;
@@ -17,7 +19,7 @@ namespace TaigaGames.SineysArkanoid.Pad.Scenarios
         {
             UpdateInputWay();
             
-            if (!_padService.IsPadCreated)
+            if (!_padService.IsPadCreated || !_sessionService.IsInProcess() || Time.timeScale < 0.5f)
                 return;
             
             if (_isKeyboardInput)

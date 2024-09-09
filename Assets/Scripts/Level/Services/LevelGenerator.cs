@@ -28,13 +28,15 @@ namespace TaigaGames.SineysArkanoid.Level.Services
 
         public void Dispose()
         {
-            Object.Destroy(_blocksParent);
+            if (_blocksParent)
+                Object.Destroy(_blocksParent.gameObject);
         }
 
         public void Clear()
         {
             for (var i = _blocksParent.childCount - 1; i >= 0; i--) 
                 Object.Destroy(_blocksParent.GetChild(i).gameObject);
+            _blockService.Reset();
         }
         
         public void GenerateLevel(LevelDescriptor levelDescriptor)

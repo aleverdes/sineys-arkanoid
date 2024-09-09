@@ -1,4 +1,7 @@
-﻿using TaigaGames.SineysArkanoid.Session.Services;
+﻿using System;
+using TaigaGames.SineysArkanoid.Level.Services;
+using TaigaGames.SineysArkanoid.Session.Services;
+using TMPro;
 using UnityEngine;
 using Zenject;
 
@@ -8,8 +11,10 @@ namespace TaigaGames.SineysArkanoid.Session.MonoBehaviours
     {
         [SerializeField] private RectTransform _lifeRoot;
         [SerializeField] private GameObject _lifePrefab;
+        [SerializeField] private TMP_Text _infoText;
         
         [Inject] private readonly SessionService _sessionService;
+        [Inject] private readonly BlockService _blockService;
 
         private void OnEnable()
         {
@@ -20,6 +25,11 @@ namespace TaigaGames.SineysArkanoid.Session.MonoBehaviours
         private void OnDisable()
         {
             _sessionService.LifeCountChanged -= OnLifeCountChanged;
+        }
+
+        private void Update()
+        {
+            _infoText.text = "Levle: " + (_sessionService.CurrentLevelIndex + 1) + "; Blocks: " + _blockService.CurrentBlocksCount + " / " + _blockService.StartBlocksCount;
         }
 
         private void OnLifeCountChanged(int lifeCount)

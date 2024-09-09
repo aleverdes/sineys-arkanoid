@@ -25,6 +25,12 @@ namespace TaigaGames.SineysArkanoid.Level.Services
         
         public int StartBlocksCount { get; private set; }
         public int CurrentBlocksCount { get; private set; }
+        
+        public void Reset()
+        {
+            StartBlocksCount = 0;
+            CurrentBlocksCount = 0;
+        }
 
         public void CreateBlock(BlockDescriptor descriptor, Vector2Int position, Transform parent)
         {

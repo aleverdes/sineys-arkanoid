@@ -1,15 +1,19 @@
-﻿using TaigaGames.SineysArkanoid.Session.Services;
+﻿using TaigaGames.SineysArkanoid.MainMenu.MonoBehaviours;
+using TaigaGames.SineysArkanoid.Session.Services;
 using Zenject;
 
 namespace TaigaGames.SineysArkanoid.EntryPoint.Scenarios
 {
     public class EntryPointScenario : IInitializable
     {
-        [Inject] private readonly SessionService _sessionService;
+        [Inject] private readonly DiContainer _container;
+        [Inject] private readonly MainMenuScreen _mainMenuScreen;
+        [Inject] private readonly ProgressService _progressService;
         
         public void Initialize()
         {
-            _sessionService.Start(0);
+            _progressService.Load();
+            _container.InstantiatePrefabForComponent<MainMenuScreen>(_mainMenuScreen);
         }
     }
 }

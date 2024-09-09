@@ -12,6 +12,7 @@ namespace TaigaGames.SineysArkanoid.Session.Services
     {
         [Inject] private readonly LevelGenerator _levelGenerator;
         [Inject] private readonly LevelCollection _levelCollection;
+        [Inject] private readonly BlockService _blockService;
 
         [Inject] private readonly PadService _padService;
         [Inject] private readonly PadLaunchService _padLaunchService;
@@ -19,6 +20,7 @@ namespace TaigaGames.SineysArkanoid.Session.Services
         [Inject] private readonly BallSpeedService _ballSpeedService;
         
         [Inject] private readonly SessionUIService _sessionUIService;
+        [Inject] private readonly ProgressService _progressService;
         
         private int _currentLevelIndex;
         private int _lifes;
@@ -30,11 +32,14 @@ namespace TaigaGames.SineysArkanoid.Session.Services
         public event Action<bool> InProcessChanged; 
         public int LifeCount => _lifes;
         public int Score => _score;
+        public int CurrentLevelIndex => _currentLevelIndex;
 
         public void Start(int levelIndex)
         {
             _currentLevelIndex = levelIndex;
             _lifes = 3;
+
+            Time.timeScale = 1f;
             
             _levelGenerator.Initialize();
             _levelGenerator.GenerateLevel(_levelCollection.Levels[_currentLevelIndex]);
@@ -42,16 +47,40 @@ namespace TaigaGames.SineysArkanoid.Session.Services
             _padService.CreatePad();
             CreateNewBall();
             
+            _sessionUIService.ShowGUIScreen();
+            
             _inProcess = true;
+
+            if (!_progressService.HelpShown)
+            {
+                _sessionUIService.ShowHelpScreen();
+                _progressService.HelpShown = true;
+                _progressService.Save();
+            }
         }
 
+        public void Retry()
+        {
+            Clear();
+            Start(_currentLevelIndex);
+        }
+
+        public void Clear()
+        {
+            _levelGenerator.Dispose();
+            _padService.DestroyPad();
+            _ballService.DestroyAllBalls();
+            _sessionUIService.HideGUIScreen();
+        }
+        
         public void Tick()
         {
             if (!_inProcess) return;
-            UpdateBalls();
+            UpdateLose();
+            UpdateWin();
         }
 
-        private void UpdateBalls()
+        private void UpdateLose()
         {
             if (_ballService.GetBallsCount() > 0) return;
             
@@ -65,6 +94,17 @@ namespace TaigaGames.SineysArkanoid.Session.Services
             {
                 _inProcess = false;
                 _sessionUIService.ShowFailScreen();
+            }
+        }
+
+        private void UpdateWin()
+        {
+            if (_blockService.CurrentBlocksCount == 0)
+            {
+                Time.timeScale = 0f;
+                _inProcess = false;
+                _sessionUIService.ShowWinScreen();
+                _progressService.Open(_currentLevelIndex + 1);
             }
         }
 

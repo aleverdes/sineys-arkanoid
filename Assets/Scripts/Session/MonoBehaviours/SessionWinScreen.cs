@@ -1,5 +1,4 @@
-﻿using System;
-using TaigaGames.SineysArkanoid.Session.Services;
+﻿using TaigaGames.SineysArkanoid.Session.Services;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -7,22 +6,23 @@ using Zenject;
 
 namespace TaigaGames.SineysArkanoid.Session.MonoBehaviours
 {
-    public class SessionFailScreen : MonoBehaviour
+    public class SessionWinScreen : MonoBehaviour
     {
-        [SerializeField] private Button _retryButton;
+        [SerializeField] private Button _nextButton;
         [SerializeField] private Button _mainMenuButton;
-
+        
         [Inject] private readonly SessionService _sessionService;
+        [Inject] private readonly ProgressService _progressService;
         
         private void OnEnable()
         {
-            _retryButton.onClick.AddListener(OnRetryButtonClicked);
+            _nextButton.onClick.AddListener(OnNextButtonClicked);
             _mainMenuButton.onClick.AddListener(OnMainMenuButtonClicked);
         }
         
         private void OnDisable()
         {
-            _retryButton.onClick.RemoveListener(OnRetryButtonClicked);
+            _nextButton.onClick.RemoveListener(OnNextButtonClicked);
             _mainMenuButton.onClick.RemoveListener(OnMainMenuButtonClicked);
         }
 
@@ -31,10 +31,12 @@ namespace TaigaGames.SineysArkanoid.Session.MonoBehaviours
             if (Input.GetKeyDown(KeyCode.Escape))
                 OnMainMenuButtonClicked();
         }
-        
-        private void OnRetryButtonClicked()
+
+        private void OnNextButtonClicked()
         {
-            _sessionService.Retry();
+            _sessionService.Clear();
+            _sessionService.Start(_progressService.CurrentLevelIndex);
+            Destroy(gameObject);
         }
         
         private void OnMainMenuButtonClicked()

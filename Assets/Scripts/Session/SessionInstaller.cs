@@ -11,13 +11,18 @@ namespace TaigaGames.SineysArkanoid.Session
         [SerializeField] private SessionFailScreen _sessionFailScreen;
         [SerializeField] private SessionPauseScreen _sessionPauseScreen;
         [SerializeField] private SessionGUIScreen _sessionGUIScreen;
+        [SerializeField] private SessionWinScreen _sessionWinScreen;
+        [SerializeField] private HelpScreen _helpScreen;
         
         public override void InstallBindings()
         {
             Container.BindInstance(_sessionFailScreen).AsSingle();
             Container.BindInstance(_sessionPauseScreen).AsSingle();
             Container.BindInstance(_sessionGUIScreen).AsSingle();
+            Container.BindInstance(_sessionWinScreen).AsSingle();
+            Container.BindInstance(_helpScreen).AsSingle();
             
+            Container.BindInterfacesAndSelfTo<ProgressService>().AsSingle();
             Container.BindInterfacesAndSelfTo<SessionService>().AsSingle();
             Container.BindInterfacesAndSelfTo<SessionUIService>().AsSingle();
             
