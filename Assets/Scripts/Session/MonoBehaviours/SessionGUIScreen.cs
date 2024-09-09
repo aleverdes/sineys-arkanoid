@@ -29,7 +29,7 @@ namespace TaigaGames.SineysArkanoid.Session.MonoBehaviours
 
         private void Update()
         {
-            _infoText.text = "Levle: " + (_sessionService.CurrentLevelIndex + 1) + "; Blocks: " + _blockService.CurrentBlocksCount + " / " + _blockService.StartBlocksCount;
+            _infoText.text = "Level: " + (_sessionService.CurrentLevelIndex + 1) + "; Blocks: " + _blockService.CurrentBlocksCount + " / " + _blockService.StartBlocksCount;
         }
 
         private void OnLifeCountChanged(int lifeCount)
