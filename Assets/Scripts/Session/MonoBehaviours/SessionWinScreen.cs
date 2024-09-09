@@ -12,6 +12,7 @@ namespace TaigaGames.SineysArkanoid.Session.MonoBehaviours
         [SerializeField] private Button _mainMenuButton;
         
         [Inject] private readonly SessionService _sessionService;
+        [Inject] private readonly SessionUIService _sessionUIService;
         [Inject] private readonly ProgressService _progressService;
         
         private void OnEnable()
@@ -36,7 +37,7 @@ namespace TaigaGames.SineysArkanoid.Session.MonoBehaviours
         {
             _sessionService.Clear();
             _sessionService.Start(_progressService.CurrentLevelIndex);
-            Destroy(gameObject);
+            _sessionUIService.HideWinScreen();
         }
         
         private void OnMainMenuButtonClicked()

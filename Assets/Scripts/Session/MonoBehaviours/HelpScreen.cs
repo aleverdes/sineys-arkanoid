@@ -1,12 +1,16 @@
 ﻿using System;
+using TaigaGames.SineysArkanoid.Session.Services;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace TaigaGames.SineysArkanoid.Session.MonoBehaviours
 {
     public class HelpScreen : MonoBehaviour
     {
         [SerializeField] private Button _continueButton;
+        
+        [Inject] private readonly SessionUIService _sessionUIService;
         
         private void Awake()
         {
@@ -36,7 +40,7 @@ namespace TaigaGames.SineysArkanoid.Session.MonoBehaviours
         
         private void OnContinueButtonClicked()
         {
-            Destroy(gameObject);
+            _sessionUIService.HideHelpScreen();
         }
     }
 }

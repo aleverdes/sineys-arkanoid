@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using TaigaGames.SineysArkanoid.Session.Services;
+using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace TaigaGames.SineysArkanoid.Session.MonoBehaviours
 {
@@ -7,6 +9,8 @@ namespace TaigaGames.SineysArkanoid.Session.MonoBehaviours
     {
         [SerializeField] private Button _continueButton;
         [SerializeField] private Button _mainMenuButton;
+        
+        [Inject] private readonly SessionUIService _sessionUIService;
         
         private void Awake()
         {
@@ -38,7 +42,7 @@ namespace TaigaGames.SineysArkanoid.Session.MonoBehaviours
         
         private void OnContinueButtonClicked()
         {
-            Destroy(gameObject);
+            _sessionUIService.HidePauseScreen();
         }
         
         private void OnMainMenuButtonClicked()

@@ -11,6 +11,7 @@ namespace TaigaGames.SineysArkanoid.MainMenu.MonoBehaviours
 {
     public class MainMenuScreen : MonoBehaviour
     {
+        [SerializeField] private Button _quitButton;
         [SerializeField] private GridLayoutGroup _levelsGrid;
         [SerializeField] private LevelButton _levelsButtonPrefab;
 
@@ -37,6 +38,21 @@ namespace TaigaGames.SineysArkanoid.MainMenu.MonoBehaviours
             foreach (var button in _levelButtons)
                 if (button)
                     button.OnClick -= OnLevelButtonClick;
+        }
+
+        private void OnEnable()
+        {
+            _quitButton.onClick.AddListener(OnQuitButtonClick);
+        }
+        
+        private void OnDisable()
+        {
+            _quitButton.onClick.RemoveListener(OnQuitButtonClick);
+        }
+
+        private void OnQuitButtonClick()
+        {
+            Application.Quit();
         }
 
         private void OnLevelButtonClick(LevelButton levelButton)

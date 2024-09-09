@@ -13,6 +13,7 @@ namespace TaigaGames.SineysArkanoid.Session.MonoBehaviours
         [SerializeField] private Button _mainMenuButton;
 
         [Inject] private readonly SessionService _sessionService;
+        [Inject] private readonly SessionUIService _sessionUIService;
         
         private void OnEnable()
         {
@@ -35,6 +36,7 @@ namespace TaigaGames.SineysArkanoid.Session.MonoBehaviours
         private void OnRetryButtonClicked()
         {
             _sessionService.Retry();
+            _sessionUIService.HideFailScreen();
         }
         
         private void OnMainMenuButtonClicked()
