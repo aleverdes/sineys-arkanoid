@@ -32,10 +32,11 @@ namespace TaigaGames.SineysArkanoid.Ball.MonoBehaviours
                 Destroy(blockBehaviour.gameObject);
 
             // Forbid horizontal movement
-            if (Mathf.Abs(other.contacts[0].normal.y) < 0.2f)
+            const float minNormalY = 0.2f;
+            if (Mathf.Abs(other.contacts[0].normal.normalized.y) < minNormalY)
             {
                 var velocity = Rigidbody.linearVelocity;
-                velocity = velocity.magnitude * new Vector2(velocity.x, 0.2f * Mathf.Sign(velocity.y)).normalized;
+                velocity = velocity.magnitude * new Vector2(velocity.normalized.x, minNormalY * Mathf.Sign(velocity.y)).normalized;
                 Rigidbody.linearVelocity = velocity;
             }
         }
