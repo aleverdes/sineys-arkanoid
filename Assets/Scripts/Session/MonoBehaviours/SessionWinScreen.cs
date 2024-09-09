@@ -1,4 +1,5 @@
-﻿using TaigaGames.SineysArkanoid.Session.Services;
+﻿using TaigaGames.SineysArkanoid.Level.ScriptableObjects;
+using TaigaGames.SineysArkanoid.Session.Services;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -15,6 +16,7 @@ namespace TaigaGames.SineysArkanoid.Session.MonoBehaviours
         [Inject] private readonly SessionService _sessionService;
         [Inject] private readonly SessionUIService _sessionUIService;
         [Inject] private readonly ProgressService _progressService;
+        [Inject] private readonly LevelCollection _levelCollection;
         
         private void OnEnable()
         {
@@ -22,6 +24,9 @@ namespace TaigaGames.SineysArkanoid.Session.MonoBehaviours
             _mainMenuButton.onClick.AddListener(OnMainMenuButtonClicked);
             
             AudioSource.PlayClipAtPoint(_winSound, Vector3.zero);
+            
+            if (_sessionService.CurrentLevelIndex + 1 >= _levelCollection.Levels.Count)
+                _nextButton.gameObject.SetActive(false);
         }
         
         private void OnDisable()
