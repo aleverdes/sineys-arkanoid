@@ -1,6 +1,7 @@
 ﻿using System;
 using TaigaGames.SineysArkanoid.Ball.MonoBehaviours;
 using TaigaGames.SineysArkanoid.Ball.Services;
+using TaigaGames.SineysArkanoid.Level.MonoBehaviours;
 using TaigaGames.SineysArkanoid.Pad.ScriptableObjects;
 using TaigaGames.SineysArkanoid.Pad.Services;
 using UnityEngine;
@@ -13,6 +14,7 @@ namespace TaigaGames.SineysArkanoid.Pad.MonoBehaviours
         [field: SerializeField] public SpriteRenderer SpriteRenderer { get; private set; }
         [field: SerializeField] public BoxCollider2D Collider { get; private set; }
         
+        [Inject] private readonly DiContainer _diContainer;
         [Inject] private readonly PadLaunchService _padLaunchService;
         [Inject] private readonly PadSettings _padSettings;
         [Inject] private readonly BallService _ballService;
@@ -39,6 +41,15 @@ namespace TaigaGames.SineysArkanoid.Pad.MonoBehaviours
             }
 
             _collisionCooldown = 0.2f;
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.TryGetComponent(out BoosterBehaviour boosterBehaviour))
+            {
+                boosterBehaviour.Booster.Execute(_diContainer);
+                Destroy(boosterBehaviour.gameObject);
+            }
         }
     }
 }

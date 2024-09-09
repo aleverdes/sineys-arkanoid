@@ -16,6 +16,7 @@ namespace TaigaGames.SineysArkanoid.Level.Services
         [Inject] private readonly MapSettings _mapSettings;
         [Inject] private readonly BlockCollection _blockCollection;
         [Inject] private readonly BlockBehaviour _blockPrefab;
+        [Inject] private readonly BlockService _blockService;
         
         private Transform _blocksParent;
 
@@ -53,23 +54,12 @@ namespace TaigaGames.SineysArkanoid.Level.Services
                 if (color.a < 0.5f) continue;
                 
                 var descriptor = GetBlockDescriptor(color);
-                
-                var block = Object.Instantiate(_blockPrefab, _blocksParent);
-                block.transform.localPosition = new Vector3(
-                    x * _mapSettings.BlockSize.x - _mapSettings.MapSize.x / 2 + _mapSettings.BlockSize.x / 2,
-                    y * _mapSettings.BlockSize.y - _mapSettings.MapSize.y / 2 + _mapSettings.BlockSize.y / 2,
-                    0f
-                );
-                block.SpriteRenderer.sprite = descriptor.Sprite;
-                block.transform.localScale = 0.2f * Vector3.one;
-                block.gameObject.AddComponent<PolygonCollider2D>();
+                _blockService.CreateBlock(descriptor, new Vector2Int(x, y), _blocksParent);
             }
         }
         
         private BlockDescriptor GetBlockDescriptor(Color color)
         {
-            
-            
             var bestDistance = float.MaxValue;
             BlockDescriptor bestDescriptor = null;
             

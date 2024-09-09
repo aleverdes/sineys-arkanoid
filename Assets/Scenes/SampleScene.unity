@@ -1395,6 +1395,8 @@ MonoBehaviour:
   _levelCollection: {fileID: 11400000, guid: 683d79c551e9460429be6a707c39b550, type: 2}
   _blockCollection: {fileID: 11400000, guid: dde5abb334721274093cfe77784fac4a, type: 2}
   _blockPrefab: {fileID: 4535998759504028892, guid: 70fbf34dd835bc24bb75e8f6cce9243d, type: 3}
+  _boostersCollection: {fileID: 11400000, guid: 5ab2921897943954db194660a291eaae, type: 2}
+  _boosterPrefab: {fileID: 6341113624637603976, guid: ec64a41a14ba6d34c945919d552d0eff, type: 3}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0

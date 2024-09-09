@@ -1,5 +1,6 @@
 ﻿using TaigaGames.SineysArkanoid.Ball.Services;
 using TaigaGames.SineysArkanoid.Level.MonoBehaviours;
+using TaigaGames.SineysArkanoid.Level.Services;
 using UnityEngine;
 using Zenject;
 
@@ -12,6 +13,16 @@ namespace TaigaGames.SineysArkanoid.Ball.MonoBehaviours
         [field: SerializeField] public Rigidbody2D Rigidbody { get; private set; }
 
         [Inject] private readonly BallService _ballService;
+        [Inject] private readonly BallSpeedService _ballSpeedService;
+        [Inject] private readonly BlockService _blockService;
+
+        private bool _prepared;
+        
+        [Inject]
+        public void Prepare()
+        {
+            _prepared = true;
+        }
         
         private void Reset()
         {
@@ -28,8 +39,11 @@ namespace TaigaGames.SineysArkanoid.Ball.MonoBehaviours
 
         private void OnCollisionEnter2D(Collision2D other)
         {
+            if (!_prepared)
+                return;
+            
             if (other.gameObject.TryGetComponent<BlockBehaviour>(out var blockBehaviour)) 
-                Destroy(blockBehaviour.gameObject);
+                _blockService.DestroyBlock(blockBehaviour);
 
             // Forbid horizontal movement
             const float minNormalY = 0.2f;
@@ -39,6 +53,8 @@ namespace TaigaGames.SineysArkanoid.Ball.MonoBehaviours
                 velocity = velocity.magnitude * new Vector2(velocity.normalized.x, minNormalY * Mathf.Sign(velocity.y)).normalized;
                 Rigidbody.linearVelocity = velocity;
             }
+            
+            Rigidbody.linearVelocity = Rigidbody.linearVelocity.normalized * _ballSpeedService.Speed;
         }
     }
 }

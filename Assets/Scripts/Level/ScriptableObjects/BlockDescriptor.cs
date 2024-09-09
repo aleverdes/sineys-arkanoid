@@ -8,6 +8,5 @@ namespace TaigaGames.SineysArkanoid.Level.ScriptableObjects
     {
         [field: SerializeField] public Sprite Sprite { get; private set; }
         [field: SerializeField, ColorUsage(false, false)] public Color EditorColor { get; private set; } = Color.white;
-        [field: SerializeField] public BoosterDescriptor[] Boosters { get; private set; }
     }
 }
