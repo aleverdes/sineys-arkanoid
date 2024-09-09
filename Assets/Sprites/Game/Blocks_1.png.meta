@@ -54,7 +54,7 @@ TextureImporter:
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -561,7 +561,23 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Blocks_1_0: -8170171624442940486
+      Blocks_1_1: -6145290071543344259
+      Blocks_1_10: -5151005132084385216
+      Blocks_1_11: 8768053700466663105
+      Blocks_1_12: 7140144572444612202
+      Blocks_1_13: 4910016344634837850
+      Blocks_1_14: -3715254693921710802
+      Blocks_1_15: -4229983350459923733
+      Blocks_1_2: 3952860609386359549
+      Blocks_1_3: 8127473737479623105
+      Blocks_1_4: 2076365908024786332
+      Blocks_1_5: 254064157051600920
+      Blocks_1_6: 3634989797127847659
+      Blocks_1_7: -527240055009815521
+      Blocks_1_8: -3505923364251043097
+      Blocks_1_9: -3893289634865820744
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
