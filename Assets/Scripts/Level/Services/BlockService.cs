@@ -1,4 +1,5 @@
 ﻿using System;
+using TaigaGames.SineysArkanoid.Ball.Services;
 using TaigaGames.SineysArkanoid.Level.MonoBehaviours;
 using TaigaGames.SineysArkanoid.Level.ScriptableObjects;
 using TaigaGames.SineysArkanoid.Level.ScriptableObjects.Boosters;
@@ -11,7 +12,8 @@ namespace TaigaGames.SineysArkanoid.Level.Services
 {
     public class BlockService
     {
-        private const float BoosterChance = 0.05f;
+        private const float BoosterChance = 0.14f;
+        private const int MaxBallsCount = 10;
 
         [Inject] private readonly DiContainer _diContainer;
         [Inject] private readonly MapSettings _mapSettings;
@@ -19,6 +21,7 @@ namespace TaigaGames.SineysArkanoid.Level.Services
         [Inject] private readonly BlockBehaviour _blockPrefab;
         [Inject] private readonly BoosterBehaviour _boosterPrefab;
         [Inject] private readonly BoostersCollection _boostersCollection;
+        [Inject] private readonly BallService _ballService;
         
         public int StartBlocksCount { get; private set; }
         public int CurrentBlocksCount { get; private set; }
@@ -47,7 +50,7 @@ namespace TaigaGames.SineysArkanoid.Level.Services
             Object.Destroy(blockBehaviour.gameObject);
             CurrentBlocksCount--;
             
-            if (Random.value < BoosterChance)
+            if (Random.value < BoosterChance && _ballService.GetBallsCount() < MaxBallsCount)
             {
                 var boosterDescriptor = _boostersCollection.Boosters[Random.Range(0, _boostersCollection.Boosters.Count)];
                 var booster = _diContainer.InstantiatePrefabForComponent<BoosterBehaviour>(_boosterPrefab);
