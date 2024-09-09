@@ -30,6 +30,14 @@ namespace TaigaGames.SineysArkanoid.Ball.MonoBehaviours
         {
             if (other.gameObject.TryGetComponent<BlockBehaviour>(out var blockBehaviour)) 
                 Destroy(blockBehaviour.gameObject);
+
+            // Forbid horizontal movement
+            if (Mathf.Abs(other.contacts[0].normal.y) < 0.2f)
+            {
+                var velocity = Rigidbody.linearVelocity;
+                velocity = velocity.magnitude * new Vector2(velocity.x, 0.2f * Mathf.Sign(velocity.y)).normalized;
+                Rigidbody.linearVelocity = velocity;
+            }
         }
     }
 }
