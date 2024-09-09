@@ -18,7 +18,7 @@ namespace TaigaGames.SineysArkanoid.MainMenu.MonoBehaviours
         public void Setup(int levelIndex, LevelState levelState)
         {
             LevelIndex = levelIndex;
-            _text.text = $"Level {levelIndex + 1}";
+            _text.text = $"Уровень {levelIndex + 1}";
 
             switch (levelState)
             {
