@@ -98,5 +98,10 @@ namespace TaigaGames.SineysArkanoid.Pad.Services
 
             return 1f - ratio;
         }
+        
+        public bool HasBallForLaunch()
+        {
+            return _ballForLaunch;
+        }
     }
 }

@@ -186,7 +186,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Exit
+  m_text: Close game
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -372,6 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 381ccb14ca1d424eabd392262a4c155c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _quitButton: {fileID: 1751333600189238816}
   _levelsGrid: {fileID: 4915611723052237463}
   _levelsButtonPrefab: {fileID: 1008576117522262867, guid: d6c19c6de7d718541a9d705323de96e9, type: 3}
 --- !u!1 &3020153882014846902

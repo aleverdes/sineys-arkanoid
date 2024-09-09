@@ -1,4 +1,5 @@
 ﻿using TaigaGames.SineysArkanoid.Ball.ScriptableObjects;
+using TaigaGames.SineysArkanoid.Pad.Services;
 using TaigaGames.SineysArkanoid.Session.Services;
 using UnityEngine;
 using Zenject;
@@ -9,6 +10,7 @@ namespace TaigaGames.SineysArkanoid.Ball.Services
     {
         [Inject] private readonly BallSettings _ballSettings;
         [Inject] private readonly SessionService _sessionService;
+        [Inject] private readonly PadLaunchService _padLaunchService;
 
         public float Speed { get; private set; } = 5f;
 
@@ -19,7 +21,7 @@ namespace TaigaGames.SineysArkanoid.Ball.Services
         
         public void Tick()
         {
-            if (!_sessionService.IsInProcess())
+            if (!_sessionService.IsInProcess() || _padLaunchService.HasBallForLaunch())
                 return;
             
             Speed = Mathf.Min(Speed + _ballSettings.IncreaseSpeedPerSecond * Time.deltaTime, _ballSettings.MaxSpeed);
