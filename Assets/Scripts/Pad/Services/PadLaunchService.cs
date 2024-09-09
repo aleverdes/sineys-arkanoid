@@ -103,5 +103,10 @@ namespace TaigaGames.SineysArkanoid.Pad.Services
         {
             return _ballForLaunch;
         }
+        
+        public bool IsBallForLaunch(BallBehaviour ballBehaviour)
+        {
+            return _ballForLaunch == ballBehaviour;
+        }
     }
 }

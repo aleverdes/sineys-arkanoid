@@ -50,6 +50,9 @@ MonoBehaviour:
   <SpriteRenderer>k__BackingField: {fileID: 3311316863664112531}
   <Collider>k__BackingField: {fileID: 1307232675435672761}
   <Rigidbody>k__BackingField: {fileID: 6559942836298321663}
+  _hitEffect: {fileID: 6382602434188880328, guid: 23a4461a6701d06439707e0e960cc4d3, type: 3}
+  _hitSound: {fileID: 8300000, guid: 269a5b2a5e04c4644a02acb3f5cee88a, type: 3}
+  _destroySound: {fileID: 8300000, guid: 531d9dd80a01794438415529ee5d96fd, type: 3}
 --- !u!50 &6559942836298321663
 Rigidbody2D:
   serializedVersion: 5

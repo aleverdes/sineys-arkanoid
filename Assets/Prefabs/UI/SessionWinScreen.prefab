@@ -722,6 +722,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _nextButton: {fileID: 131370438419028731}
   _mainMenuButton: {fileID: 6661299589022493162}
+  _winSound: {fileID: 8300000, guid: 485f17fdfab43724d81e5187a0024041, type: 3}
 --- !u!1 &5656158777620716440
 GameObject:
   m_ObjectHideFlags: 0

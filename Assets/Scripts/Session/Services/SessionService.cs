@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections;
 using TaigaGames.SineysArkanoid.Ball.Services;
 using TaigaGames.SineysArkanoid.Level.ScriptableObjects;
 using TaigaGames.SineysArkanoid.Level.Services;
 using TaigaGames.SineysArkanoid.Pad.Services;
+using TaigaGames.SineysArkanoid.Session.MonoBehaviours;
 using UnityEngine;
 using Zenject;
 
@@ -21,6 +23,8 @@ namespace TaigaGames.SineysArkanoid.Session.Services
         
         [Inject] private readonly SessionUIService _sessionUIService;
         [Inject] private readonly ProgressService _progressService;
+
+        [Inject] private readonly SessionCoroutineManager _sessionCoroutineManager;
         
         private int _currentLevelIndex;
         private int _lifes;
@@ -93,8 +97,14 @@ namespace TaigaGames.SineysArkanoid.Session.Services
             else
             {
                 _inProcess = false;
-                _sessionUIService.ShowFailScreen();
+                _sessionCoroutineManager.StartCoroutine(ShowFailScreenCoroutine());
             }
+        }
+        
+        private IEnumerator ShowFailScreenCoroutine()
+        {
+            yield return new WaitForSecondsRealtime(1f);
+            _sessionUIService.ShowFailScreen();
         }
 
         private void UpdateWin()
@@ -103,9 +113,15 @@ namespace TaigaGames.SineysArkanoid.Session.Services
             {
                 Time.timeScale = 0f;
                 _inProcess = false;
-                _sessionUIService.ShowWinScreen();
                 _progressService.Open(_currentLevelIndex + 1);
+                _sessionCoroutineManager.StartCoroutine(ShowWinScreenCoroutine());
             }
+        }
+        
+        private IEnumerator ShowWinScreenCoroutine()
+        {
+            yield return new WaitForSecondsRealtime(1f);
+            _sessionUIService.ShowWinScreen();
         }
 
         private void CreateNewBall()

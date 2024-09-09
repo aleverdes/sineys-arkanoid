@@ -10,6 +10,7 @@ namespace TaigaGames.SineysArkanoid.Session.MonoBehaviours
     {
         [SerializeField] private Button _nextButton;
         [SerializeField] private Button _mainMenuButton;
+        [SerializeField] private AudioClip _winSound;
         
         [Inject] private readonly SessionService _sessionService;
         [Inject] private readonly SessionUIService _sessionUIService;
@@ -19,6 +20,8 @@ namespace TaigaGames.SineysArkanoid.Session.MonoBehaviours
         {
             _nextButton.onClick.AddListener(OnNextButtonClicked);
             _mainMenuButton.onClick.AddListener(OnMainMenuButtonClicked);
+            
+            AudioSource.PlayClipAtPoint(_winSound, Vector3.zero);
         }
         
         private void OnDisable()

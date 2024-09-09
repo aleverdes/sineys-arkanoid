@@ -20,6 +20,8 @@ namespace TaigaGames.SineysArkanoid.Pad.MonoBehaviours
         [Inject] private readonly BallService _ballService;
         [Inject] private readonly BallSpeedService _ballSpeedService;
 
+        [SerializeField] private AudioClip _boosterSound;
+
         private float _collisionCooldown;
 
         private void Update()
@@ -49,6 +51,8 @@ namespace TaigaGames.SineysArkanoid.Pad.MonoBehaviours
             {
                 boosterBehaviour.Booster.Execute(_diContainer);
                 Destroy(boosterBehaviour.gameObject);
+                
+                AudioSource.PlayClipAtPoint(_boosterSound, transform.position);
             }
         }
     }

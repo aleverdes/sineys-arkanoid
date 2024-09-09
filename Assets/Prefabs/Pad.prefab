@@ -177,3 +177,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <SpriteRenderer>k__BackingField: {fileID: 2468861585955026523}
   <Collider>k__BackingField: {fileID: 8869119185668766467}
+  _boosterSound: {fileID: 8300000, guid: 485f17fdfab43724d81e5187a0024041, type: 3}

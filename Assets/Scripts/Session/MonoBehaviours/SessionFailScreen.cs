@@ -11,6 +11,7 @@ namespace TaigaGames.SineysArkanoid.Session.MonoBehaviours
     {
         [SerializeField] private Button _retryButton;
         [SerializeField] private Button _mainMenuButton;
+        [SerializeField] private AudioClip _failSound;
 
         [Inject] private readonly SessionService _sessionService;
         [Inject] private readonly SessionUIService _sessionUIService;
@@ -19,6 +20,8 @@ namespace TaigaGames.SineysArkanoid.Session.MonoBehaviours
         {
             _retryButton.onClick.AddListener(OnRetryButtonClicked);
             _mainMenuButton.onClick.AddListener(OnMainMenuButtonClicked);
+            
+            AudioSource.PlayClipAtPoint(_failSound, Vector3.zero);
         }
         
         private void OnDisable()

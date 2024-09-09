@@ -632,6 +632,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _retryButton: {fileID: 4365223809859797971}
   _mainMenuButton: {fileID: 8028177370866504799}
+  _failSound: {fileID: 8300000, guid: 9afd8978b52c0974fbf07e2d3beb523f, type: 3}
 --- !u!1 &4931731875385220789
 GameObject:
   m_ObjectHideFlags: 0
